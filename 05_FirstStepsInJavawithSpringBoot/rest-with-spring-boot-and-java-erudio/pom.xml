@@ -53,7 +53,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>br.com.erudio.Startup</mainClass> <!-- Nome da sua classe principal -->
+          <mainClass>br.com.erudio.Startup</mainClass> <!-- Atualize se necessário -->
         </configuration>
       </plugin>
     </plugins>
