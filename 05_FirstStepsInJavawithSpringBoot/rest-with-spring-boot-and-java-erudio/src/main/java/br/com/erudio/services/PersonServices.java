@@ -1,35 +1,45 @@
-package br.com.erudio.services;
+package br.com.erudio.service;
 
 import br.com.erudio.model.Person;
+import br.com.erudio.repository.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.logging.Logger;
 
 @Service
 public class PersonServices {
 
-    private static AtomicLong counter = new AtomicLong();
-    private Logger logger = Logger.getLogger(PersonServices.class.getName());
-    private List<Person> persons = new ArrayList<>(); // Armazenamento temporário
+    @Autowired
+    private PersonRepository repository;
 
-    public Person findById(Long id) {
-        logger.info("Finding one person with ID: " + id);
-        return persons.stream()
-            .filter(person -> person.getId().equals(id))
-            .findFirst()
-            .orElse(null); // Retorna null se não encontrado
-    }
-
+    // Método para encontrar todas as pessoas
     public List<Person> findAll() {
-        return persons; // Retorna a lista de pessoas
+        return repository.findAll();
     }
 
-    public void addPerson(Person person) {
-        person.setId(counter.incrementAndGet()); // Gera um ID único
-        persons.add(person); // Adiciona a pessoa à lista
-        logger.info("Added person: " + person);
+    // Método para encontrar uma pessoa pelo ID
+    public Person findById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    // Método para salvar uma nova pessoa (CREATE)
+    public Person save(Person person) {
+        return repository.save(person);
+    }
+
+    // Método para atualizar uma pessoa existente (UPDATE)
+    public Person update(Long id, Person person) {
+        if (!repository.existsById(id)) {
+            return null; // Ou lançar uma exceção se a pessoa não existir
+        }
+        person.setId(id); // Define o ID para o objeto que está sendo atualizado
+        return repository.save(person); // Salva a pessoa atualizada
+    }
+
+    // Método para deletar uma pessoa pelo ID (DELETE)
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
+

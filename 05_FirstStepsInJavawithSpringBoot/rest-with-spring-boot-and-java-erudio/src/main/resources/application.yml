@@ -1,1 +1,9 @@
-spring.application.name=rest-with-spring-boot-and-java-erudio
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rest_with_spring_boot_udemy
+    username: evoge_user
+    password: evoge_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

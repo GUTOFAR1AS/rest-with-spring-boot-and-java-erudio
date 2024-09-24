@@ -1,35 +1,38 @@
 package br.com.erudio.controller;
 
 import br.com.erudio.model.Person;
-import br.com.erudio.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/person") // Definindo o caminho base para os endpoints
+@RequestMapping("/persons")
 public class PersonController {
 
     @Autowired
-    private PersonServices personServices;
+    private br.com.erudio.service.PersonServices service;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Person> findAll() {
-        return personServices.findAll();
+        return service.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Person findById(@PathVariable("id") Long id) {
-        return personServices.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Person> findById(@PathVariable Long id) {
+        Person person = service.findById(id);
+        return person != null ? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-        personServices.addPerson(person);
-        return ResponseEntity.status(HttpStatus.CREATED).body(person);
+    @PostMapping
+    public Person save(@RequestBody Person person) {
+        return service.save(person);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
