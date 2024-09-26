@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
+
 @Entity
 public class Person {
     @Id
@@ -13,8 +15,9 @@ public class Person {
     private String name;
     private String phone;
     private String email;
+    private LocalDate birthday; // Novo campo
 
-    // Getters and Setters
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -45,5 +48,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 }
