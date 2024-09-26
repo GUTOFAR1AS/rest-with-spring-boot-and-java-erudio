@@ -1,6 +1,8 @@
 package br.com.erudio.controller;
 
 import br.com.erudio.model.Person;
+import br.com.erudio.model.PersonDTO;
+import br.com.erudio.mapper.PersonMapper; // Certifique-se de importar o mapper
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,9 @@ public class PersonController {
 
     @Autowired
     private br.com.erudio.service.PersonServices service;
+
+    @Autowired
+    private PersonMapper personMapper; // Adicione a injeção do mapper
 
     @GetMapping
     public List<Person> findAll() {
@@ -44,4 +49,13 @@ public class PersonController {
         return updatedPerson != null ? ResponseEntity.ok(updatedPerson) : ResponseEntity.notFound().build();
     }
 
+    @PostMapping("/convert")
+    public ResponseEntity<PersonDTO> convertPerson(@RequestBody PersonDTO personDTO) {
+        Person person = personMapper.personDTOToPerson(personDTO);
+        // Aqui você pode salvar o person no banco de dados, se necessário
+        // Exemplo: personSaved = service.save(person);
+
+        // Retorna o PersonDTO convertido de volta
+        return new ResponseEntity<>(personMapper.personToPersonDTO(person), HttpStatus.OK);
+    }
 }

@@ -29,7 +29,7 @@
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId> <!-- Adicionada a dependência do JPA -->
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
     <dependency>
@@ -50,6 +50,19 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <!-- Dependências do MapStruct -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.5.5.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <version>1.5.5.Final</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -67,7 +80,10 @@
         <configuration>
           <source>21</source>
           <target>21</target>
-          <compilerArgs>--enable-preview</compilerArgs>
+          <compilerArgs>
+            <arg>--enable-preview</arg>
+            <arg>-Amapstruct.defaultComponentModel=spring</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
     </plugins>
