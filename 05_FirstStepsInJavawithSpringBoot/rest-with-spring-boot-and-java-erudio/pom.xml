@@ -27,31 +27,26 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
-
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
     <!-- Dependências do MapStruct -->
     <dependency>
       <groupId>org.mapstruct</groupId>
@@ -64,12 +59,20 @@
       <version>1.5.5.Final</version>
       <scope>provided</scope>
     </dependency>
-
     <!-- Dependência do Flyway -->
     <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>8.5.4</version>
+    </dependency>
+    <!-- Dependências para Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-xml</artifactId>
     </dependency>
   </dependencies>
 
@@ -78,6 +81,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>3.3.3</version> <!-- Especifica a versão do plugin -->
         <configuration>
           <mainClass>br.com.erudio.Startup</mainClass> <!-- Atualize se necessário -->
         </configuration>

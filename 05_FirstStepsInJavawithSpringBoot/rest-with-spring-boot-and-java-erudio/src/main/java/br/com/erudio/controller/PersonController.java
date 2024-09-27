@@ -2,9 +2,10 @@ package br.com.erudio.controller;
 
 import br.com.erudio.model.Person;
 import br.com.erudio.model.PersonDTO;
-import br.com.erudio.mapper.PersonMapper; // Certifique-se de importar o mapper
+import br.com.erudio.mapper.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +19,32 @@ public class PersonController {
     private br.com.erudio.service.PersonServices service;
 
     @Autowired
-    private PersonMapper personMapper; // Adicione a injeção do mapper
+    private PersonMapper personMapper;
 
-    @GetMapping
-    public List<Person> findAll() {
-        return service.findAll();
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<List<Person>> findAll(@RequestParam(required = false) String format) {
+        List<Person> persons = service.findAll();
+
+        // Se o formato for xml, retorna XML
+        if ("xml".equalsIgnoreCase(format)) {
+            return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_XML)
+                .body(persons);
+        }
+
+        // Caso contrário, retorna JSON
+        return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(persons);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Person> findById(@PathVariable Long id) {
         Person person = service.findById(id);
-        return person != null ? ResponseEntity.ok(person) : ResponseEntity.notFound().build();
+        if (person == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(person); // Simplificado
     }
 
     @PostMapping
@@ -52,10 +68,6 @@ public class PersonController {
     @PostMapping("/convert")
     public ResponseEntity<PersonDTO> convertPerson(@RequestBody PersonDTO personDTO) {
         Person person = personMapper.personDTOToPerson(personDTO);
-        // Aqui você pode salvar o person no banco de dados, se necessário
-        // Exemplo: personSaved = service.save(person);
-
-        // Retorna o PersonDTO convertido de volta
-        return new ResponseEntity<>(personMapper.personToPersonDTO(person), HttpStatus.OK);
+        return ResponseEntity.ok(personMapper.personToPersonDTO(person)); // Simplificado
     }
 }
