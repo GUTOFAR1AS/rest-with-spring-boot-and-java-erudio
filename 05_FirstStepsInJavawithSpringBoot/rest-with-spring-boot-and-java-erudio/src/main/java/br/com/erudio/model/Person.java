@@ -1,5 +1,7 @@
 package br.com.erudio.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,12 +9,16 @@ import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
+@JsonPropertyOrder({"id", "birthday", "first_name", "phone", "email"})
 @Entity
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @JsonProperty("first_name")
     private String name;
+
     private String phone;
     private String email;
     private LocalDate birthday; // Novo campo
