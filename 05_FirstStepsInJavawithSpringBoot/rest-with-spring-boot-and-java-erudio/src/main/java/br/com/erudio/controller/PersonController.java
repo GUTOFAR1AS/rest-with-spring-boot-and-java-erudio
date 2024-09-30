@@ -4,6 +4,8 @@ import br.com.erudio.model.Person;
 import br.com.erudio.model.PersonDTO;
 import br.com.erudio.mapper.PersonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,27 +28,19 @@ public class PersonController {
         MediaType.APPLICATION_XML_VALUE,
         "application/x-yaml"
     })
-    public ResponseEntity<List<Person>> findAll(@RequestParam(required = false) String format) {
+    public ResponseEntity<List<PersonDTO>> findAll(@RequestParam(required = false) String format) {
         List<Person> persons = service.findAll();
+        List<PersonDTO> personDTOs = persons.stream()
+            .map(personMapper::personToPersonDTO)
+            .toList();
 
-        // Se o formato for xml, retorna XML
-        if ("xml".equalsIgnoreCase(format)) {
-            return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_XML)
-                .body(persons);
+        // Adiciona links a cada DTO
+        for (PersonDTO personDTO : personDTOs) {
+            addLinks(personDTO);
         }
 
-        // Se o formato for yaml, retorna YAML
-        if ("yaml".equalsIgnoreCase(format)) {
-            return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/x-yaml"))
-                .body(persons);
-        }
-
-        // Caso contrário, retorna JSON
-        return ResponseEntity.ok()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(persons);
+        // Retorna a lista de DTOs com links
+        return ResponseEntity.ok(personDTOs);
     }
 
     @GetMapping(value = "/{id}", produces = {
@@ -54,20 +48,24 @@ public class PersonController {
         MediaType.APPLICATION_XML_VALUE,
         "application/x-yaml"
     })
-    public ResponseEntity<Person> findById(@PathVariable Long id, @RequestParam(required = false) String format) {
+    public ResponseEntity<PersonDTO> findById(@PathVariable Long id, @RequestParam(required = false) String format) {
         Person person = service.findById(id);
         if (person == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Se o formato for yaml, retorna YAML
-        if ("yaml".equalsIgnoreCase(format)) {
-            return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/x-yaml"))
-                .body(person);
-        }
+        PersonDTO personDTO = personMapper.personToPersonDTO(person);
+        addLinks(personDTO); // Adiciona links
 
-        return ResponseEntity.ok(person); // Simplificado para JSON
+        return ResponseEntity.ok(personDTO);
+    }
+
+    // Método para adicionar links HATEOAS ao PersonDTO
+    private void addLinks(PersonDTO personDTO) {
+        Link selfLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PersonController.class).findById(personDTO.getId(), null)).withSelfRel();
+        Link updateLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PersonController.class).update(personDTO.getId(), null)).withRel("update");
+        Link deleteLink = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(PersonController.class).delete(personDTO.getId())).withRel("delete");
+        personDTO.add(selfLink, updateLink, deleteLink);
     }
 
     @PostMapping
