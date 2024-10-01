@@ -9,7 +9,7 @@ public class ExceptionResponse {
         this.details = details;
     }
 
-    // Getters and Setters
+    // Getters e Setters
     public String getMessage() {
         return message;
     }

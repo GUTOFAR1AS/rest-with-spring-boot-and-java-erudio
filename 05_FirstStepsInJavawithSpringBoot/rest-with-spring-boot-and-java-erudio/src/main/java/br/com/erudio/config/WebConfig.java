@@ -1,30 +1,24 @@
 package br.com.erudio.config;
 
-import br.com.erudio.converter.YamlJackson2HttpMessageConverter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        // Ativando Content Negotiation via Query Parameter
         configurer
-            .favorParameter(true)
-            .parameterName("format")
-            .ignoreAcceptHeader(false) // Não ignore o cabeçalho 'Accept'
+            .favorParameter(true) // Ativa o uso de query parameter
+            .parameterName("mediaType") // Define o nome do parâmetro (pode ser 'format' ou 'mediaType')
+            .ignoreAcceptHeader(true) // Ignora o cabeçalho 'Accept' e prioriza o query parameter
             .useRegisteredExtensionsOnly(false)
-            .defaultContentType(MediaType.APPLICATION_JSON)
-            .mediaType("json", MediaType.APPLICATION_JSON)
-            .mediaType("xml", MediaType.APPLICATION_XML)
-            .mediaType("yaml", MediaType.parseMediaType("application/x-yaml"));
-    }
-
-    @Bean
-    public YamlJackson2HttpMessageConverter yamlMessageConverter() {
-        return new YamlJackson2HttpMessageConverter();
+            .defaultContentType(org.springframework.http.MediaType.APPLICATION_JSON) // Tipo de conteúdo padrão
+            .mediaType("json", org.springframework.http.MediaType.APPLICATION_JSON) // Mapeia 'json' para JSON
+            .mediaType("xml", org.springframework.http.MediaType.APPLICATION_XML); // Mapeia 'xml' para XML
     }
 }

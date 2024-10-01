@@ -1,8 +1,6 @@
 package br.com.erudio.model;
 
-import org.springframework.hateoas.EntityModel;
-
-public class PersonDTO extends EntityModel<PersonDTO> {
+public class PersonDTO {
     private Long id;
     private String name;
     private String phone;
