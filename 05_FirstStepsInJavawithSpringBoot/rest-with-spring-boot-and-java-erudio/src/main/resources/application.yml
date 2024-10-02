@@ -12,4 +12,7 @@ spring:
     baseline-on-migrate: true
     locations: classpath:db/migration
 
-
+spring-doc:
+  pathsToMatch: /persons/**
+  swagger-ui:
+    use-root-path: true
