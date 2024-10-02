@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="52d89a26-3c22-4084-a017-f715fb6124e0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/MathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/MathController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest-with-spring-boot-and-java-erudio/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/test/java/br/com/erudio/StartupTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/controller/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/mapper/PersonMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/mapper/PersonMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/model/PersonDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/main/java/br/com/erudio/model/PersonDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/test/java/br/com/erudio/PersonServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio/src/test/java/br/com/erudio/PersonServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/05_FirstStepsInJavawithSpringBoot" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -28,9 +30,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "<unknown>",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/gustavo/Downloads/Projetos/rest-with-spring-boot-and-java-erudio/05_FirstStepsInJavawithSpringBoot/rest-with-spring-boot-and-java-erudio",
+    "last_opened_file_path": "/home/gustavo/Downloads/Projetos/rest-with-spring-boot-and-java-erudio/05_FirstStepsInJavawithSpringBoot",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -40,11 +42,26 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="rest-with-spring-boot-and-java-erudio" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="rest-with-spring-boot-and-java-erudio" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.22855.74" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.22855.74" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -57,6 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1726832473675</updated>
       <workItem from="1726832475072" duration="11485000" />
+      <workItem from="1727872756944" duration="50000" />
     </task>
     <servers />
   </component>
